@@ -1,0 +1,15 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     main
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _Euclid, symObjAddr: 0x0, symBinAddr: 0x100000B80, symSize: 0x30 }
+  - { offsetInCU: 0x4D, offset: 0x4D, size: 0x8, addend: 0x0, symName: _Euclid, symObjAddr: 0x0, symBinAddr: 0x100000B80, symSize: 0x30 }
+  - { offsetInCU: 0x92, offset: 0x92, size: 0x8, addend: 0x0, symName: _Euclid.cold.1, symObjAddr: 0x2B0, symBinAddr: 0x100000E30, symSize: 0x30 }
+  - { offsetInCU: 0xA9, offset: 0xA9, size: 0x8, addend: 0x0, symName: _Prime, symObjAddr: 0x30, symBinAddr: 0x100000BB0, symSize: 0x110 }
+  - { offsetInCU: 0x17F, offset: 0x17F, size: 0x8, addend: 0x0, symName: _linear_generator, symObjAddr: 0x140, symBinAddr: 0x100000CC0, symSize: 0xF0 }
+  - { offsetInCU: 0x276, offset: 0x276, size: 0x8, addend: 0x0, symName: _linear_generator.cold.2, symObjAddr: 0x310, symBinAddr: 0x100000E90, symSize: 0x30 }
+  - { offsetInCU: 0x28D, offset: 0x28D, size: 0x8, addend: 0x0, symName: _linear_generator.cold.3, symObjAddr: 0x340, symBinAddr: 0x100000EC0, symSize: 0x21 }
+  - { offsetInCU: 0x2A4, offset: 0x2A4, size: 0x8, addend: 0x0, symName: _linear_generator.cold.1, symObjAddr: 0x2E0, symBinAddr: 0x100000E60, symSize: 0x30 }
+  - { offsetInCU: 0x2BB, offset: 0x2BB, size: 0x8, addend: 0x0, symName: _BBJ_generator, symObjAddr: 0x230, symBinAddr: 0x100000DB0, symSize: 0x10 }
+  - { offsetInCU: 0x2D4, offset: 0x2D4, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x240, symBinAddr: 0x100000DC0, symSize: 0x70 }
+...
