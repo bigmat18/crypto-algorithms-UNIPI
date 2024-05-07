@@ -2,16 +2,30 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <math.h>
 
-// Massimo comun divisore (MCD)
+// Found Massimo comun divisore (MCD)
 int Euclid(int a, int b) {
     assert(a >= b);
     if (b == 0) return a;
     else return Euclid(b, a % b);
 }
 
+// Check num is prime number
+bool IsPrime(int num) {
+    if(num > 1) {
+        for(int i = 2; i < (num/2) + 1; i++) {
+            if ((num % i) == 0) 
+                return false;
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // Primes numbers 
-int* Prime(int num) {
+int* PrimeGenerator(int num) {
     bool prime[num + 1];
     int count = num + 1;
     for (int i = 0; i <= num; i++)
