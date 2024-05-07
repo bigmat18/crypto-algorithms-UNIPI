@@ -4,6 +4,10 @@
 #include <stdbool.h>
 #include <math.h>
 
+inline int Random(int min, int max) {
+    return rand() % (max + 1 - min) + min;
+}
+
 // Found Massimo comun divisore (MCD)
 int Euclid(int a, int b) {
     assert(a >= b);

@@ -26,7 +26,7 @@ int* linear_generator(int a, int b, int m, int x, int n) {
  * m = size of bit sequenze
  */
 int* BBS_generator(long int p, long int q, int x0, int n, int m) {
-    // Pre condition to generate a real sequenze of random numebers
+    // Pre condition to generate a sequenze of random value
     assert(p > 0 && q > 0 && x0 > 0 && m > 0);
     assert(m <= n);
     assert(IsPrime(2 * floorf((float)p / 4) + 1));
@@ -51,3 +51,4 @@ int* BBS_generator(long int p, long int q, int x0, int n, int m) {
 
     return result;
 }
+

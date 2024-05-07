@@ -1,4 +1,4 @@
-#include "generators.h"
+#include "Generators.h"
 
 int main(void) {
     int n = 10;
