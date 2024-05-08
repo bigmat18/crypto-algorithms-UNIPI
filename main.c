@@ -1,5 +1,7 @@
 #include "Generators.h"
 #include "HistoricalCiphers.h"
+#include "DES.h"
+#include "AES.h"
 
 int main(void) {
     // int n = 10;
@@ -19,12 +21,16 @@ int main(void) {
     // Vigenere(msg, key);
     // printf("%s", msg);
 
-    int trasp[] = {0, 1, 3, 2};
-    char* msg = strdup("abcdefgh");
+    // int trasp[] = {0, 1, 3, 2};
+    // char* msg = strdup("abcdefgh");
 
-    printf("%s\n", msg);
-    Trasposition(msg, trasp, 4);
-    printf("%s", msg);
+    // printf("%s\n", msg);
+    // Trasposition(msg, trasp, 4);
+    // printf("%s", msg);
+
+    unsigned char *msg = (unsigned char*)strdup("abcdefghilmnopq");
+    PI(msg);
+
 
     return 0;
 }
