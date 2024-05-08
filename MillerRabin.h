@@ -60,6 +60,10 @@ bool MillerRabin(int N) {
  * ==> (1/4)^k it's the possible error of algoritm.
 */
 
+/**
+ * The density of primes number <N is N/log_e(N) for N -> +inf.
+ * For this in a sufficiently big neighbourhood of N there is a prime number.
+ */
 int PrimeMR(int n) {
     int N; // = 1S1 with S is a sequence  of n-2 bit generate from a pseudo-random generator.
     while (MillerRabin(N)) {
@@ -67,3 +71,4 @@ int PrimeMR(int n) {
     }
     return N;
 }
+/** This algoritms is polynomial */

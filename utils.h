@@ -3,6 +3,10 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <math.h>
+#include <string.h>
+
+#ifndef UTILS_H
+#define UTILS_H
 
 inline int Random(int min, int max) {
     return rand() % (max + 1 - min) + min;
@@ -56,3 +60,5 @@ int* PrimeGenerator(int num) {
     }
     return prime_num;
 }
+#endif
+
