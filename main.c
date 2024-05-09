@@ -28,24 +28,32 @@ int main(void) {
     // Trasposition(msg, trasp, 4);
     // printf("%s", msg);
 
-    unsigned char *msg = (unsigned char*)strdup("abcdefgh");
-    int size = strlen((char*)msg);
+    // unsigned char *msg = (unsigned char*)strdup("abcdefgh");
+    // int size = strlen((char*)msg);
 
-    for (int i = 0; i < size; i++)
-        printf("%d ", msg[i]);
+    // for (int i = 0; i < size; i++)
+    //     printf("%d ", msg[i]);
+    // printf("\n");
+
+    // PI(msg);
+
+    // for (int i = 0; i < size; i++)
+    //     printf("%d ", msg[i]);
+    // printf("\n");
+
+    // PF(msg);
+
+    // for (int i = 0; i < size; i++)
+    //     printf("%d ", msg[i]);
+    // printf("\n");
+
+    unsigned char* key = (unsigned char*)strdup("\xF1\xFF\xFF\xFF\xFF\xFF\xFF\x00");
+    for (int i = 0; i < 8; i++)
+        printf("%d ", key[i]);
     printf("\n");
-
-    PI(msg);
-
-    for (int i = 0; i < size; i++)
-        printf("%d ", msg[i]);
-    printf("\n");
-
-    PF(msg);
-
-    for (int i = 0; i < size; i++)
-        printf("%d ", msg[i]);
-    printf("\n");
+    key = T(key);
+    for(int i = 0; i < 7; i++)
+        printf("%d ", key[i]);
 
     return 0;
 }

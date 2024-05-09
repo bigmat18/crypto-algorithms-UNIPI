@@ -47,14 +47,39 @@ void PF(unsigned char* crt) {
         37, 5, 45, 13, 53, 21, 61, 29,
         36, 4, 44, 12, 52, 20, 60, 28,
         35, 3, 43, 11, 51, 19, 59, 27,
-        34, 2, 42, 10, 50, 18, 58, 22,
+        34, 2, 42, 10, 50, 18, 58, 26,
         33, 1, 41, 9, 49, 17, 57, 25
     };
     Permutation(crt, permutations, 64);
 }
 
-void T(void *key) {
+unsigned char* T(unsigned char *key) {
+    unsigned char *new_key = (unsigned char*)calloc(7, sizeof(unsigned char));
+    int new_key_index = 0;
 
+    unsigned char app = 0;
+    for(int i = 0, j = 0; i < 64; i++) {
+        if(i % 8 == 0)
+            continue;
+
+        app <<= 1;
+        volatile unsigned char p1 = key[i / 8];
+        volatile unsigned char p2 = 7 - (i % 8);
+        volatile unsigned char p3 = p1 >> p2;
+        volatile unsigned char p4 = p3 & 0x01;
+        
+        app |= p4; 
+        j++;
+
+        if(j == 8) {
+            j = 0;
+            new_key[new_key_index] = app;
+            new_key_index++;
+            app = 0;
+        }
+    }
+
+    return new_key;
 }
 
 void DES_Enc(char* msg, char* key) {
