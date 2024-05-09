@@ -28,9 +28,24 @@ int main(void) {
     // Trasposition(msg, trasp, 4);
     // printf("%s", msg);
 
-    unsigned char *msg = (unsigned char*)strdup("abcdefghilmnopq");
+    unsigned char *msg = (unsigned char*)strdup("abcdefgh");
+    int size = strlen((char*)msg);
+
+    for (int i = 0; i < size; i++)
+        printf("%d ", msg[i]);
+    printf("\n");
+
     PI(msg);
 
+    for (int i = 0; i < size; i++)
+        printf("%d ", msg[i]);
+    printf("\n");
+
+    PF(msg);
+
+    for (int i = 0; i < size; i++)
+        printf("%d ", msg[i]);
+    printf("\n");
 
     return 0;
 }
