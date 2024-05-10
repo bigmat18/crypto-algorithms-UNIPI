@@ -47,13 +47,23 @@ int main(void) {
     //     printf("%d ", msg[i]);
     // printf("\n");
 
-    unsigned char* key = (unsigned char*)strdup("\xF1\xFF\xFF\xFF\xFF\xFF\xFF\x00");
-    for (int i = 0; i < 8; i++)
+    unsigned char* key = (unsigned char*)strdup("\xFF\xEF\xFF");
+    // for (int i = 0; i < 8; i++)
+    //     printf("%d ", key[i]);
+    // printf("\n");
+    // key = T(key);
+    // for(int i = 0; i < 7; i++)
+    //     printf("%d ", key[i]);
+
+    for (int i = 0; i < 3; i++)
         printf("%d ", key[i]);
     printf("\n");
-    key = T(key);
-    for(int i = 0; i < 7; i++)
+
+    SC(key, 1, 3 * 8);
+    
+    for (int i = 0; i < 3; i++)
         printf("%d ", key[i]);
+    printf("\n");
 
     return 0;
 }

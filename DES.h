@@ -91,8 +91,38 @@ void EP(unsigned char* msg) {
     Permutation(msg, permutations, 48);
 }
 
-unsigned char* SC(unsigned char *key) {
+unsigned char* SC(unsigned char *key, unsigned int step, unsigned int size) {
+    assert(size % 8 == 0);
+    unsigned char* new_key = (unsigned char*)calloc(size / 8, sizeof(unsigned char));
 
+    unsigned int half = size / 2;
+    volatile unsigned char value;
+    for(int i = 0; i < half; i++) {
+        new_key[i / 8] <<= 1;
+        unsigned char index = ((i + step) % half) / 8;
+        unsigned char bit = ((i + step) % half) % 8;
+        
+        value = (key[index] >> (7 - bit));
+
+        new_key[i / 8] |= value & 0x01;
+        // printf("value: %d, bit: %d --> value: %d, bit: %d\n", index, bit, i / 8, i % 8);
+    }
+    for(int i = half; i < size; i++) {
+        new_key[i / 8] <<= 1;
+        unsigned char index = ((i + step) % size) / 8 >= (half / 8) ? ((i + step) % size) / 8 : (((i + step) % size) / 8) + (half / 8);
+        unsigned char bit = ((i + step) % size) / 8 >= (half / 8) ? ((i + step) % size) % 8 : (((i + step) % size) % 8) + (half % 8);
+
+        value = (key[index] >> (7 - bit)) & 0x01;
+
+        new_key[i / 8] |= value;
+        // printf("value: %d, bit: %d --> value: %d, bit: %d\n", index, bit, i / 8, i % 8);
+    }
+
+    for(int i = 0; i < size / 8; i++) {
+        key[i] = new_key[i];
+    }
+    
+    return new_key;
 }
 
 void S(unsigned char* msg) {
@@ -173,7 +203,7 @@ void DES_Enc(char* msg, char* key) {
     // Itero per ogni fase, nel caso del DES sono 16
     for (int i = 0; i < 16; i++) {
         key_per_step = new_key;
-        new_key = SC(key_per_step);
+        new_key = SC(key_per_step, 1, 58);
 
         // utilizzo key_per_step
         CT(key_per_step);
