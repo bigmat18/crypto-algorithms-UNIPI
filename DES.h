@@ -97,7 +97,8 @@ unsigned char* SC(unsigned char *key, unsigned int step, unsigned int size) {
 
     unsigned int half = size / 2;
     volatile unsigned char value;
-    for(int i = 0; i < half; i++) {
+
+    for(unsigned int i = 0; i < half; i++) {
         new_key[i / 8] <<= 1;
         unsigned char index = ((i + step) % half) / 8;
         unsigned char bit = ((i + step) % half) % 8;
@@ -107,7 +108,7 @@ unsigned char* SC(unsigned char *key, unsigned int step, unsigned int size) {
         new_key[i / 8] |= value & 0x01;
         // printf("value: %d, bit: %d --> value: %d, bit: %d\n", index, bit, i / 8, i % 8);
     }
-    for(int i = half; i < size; i++) {
+    for(unsigned int i = half; i < size; i++) {
         new_key[i / 8] <<= 1;
         unsigned char index = ((i + step) % size) / 8 >= (half / 8) ? ((i + step) % size) / 8 : (((i + step) % size) / 8) + (half / 8);
         unsigned char bit = ((i + step) % size) / 8 >= (half / 8) ? ((i + step) % size) % 8 : (((i + step) % size) % 8) + (half % 8);
@@ -118,7 +119,7 @@ unsigned char* SC(unsigned char *key, unsigned int step, unsigned int size) {
         // printf("value: %d, bit: %d --> value: %d, bit: %d\n", index, bit, i / 8, i % 8);
     }
 
-    for(int i = 0; i < size / 8; i++) {
+    for(unsigned int i = 0; i < size / 8; i++) {
         key[i] = new_key[i];
     }
     
@@ -126,7 +127,36 @@ unsigned char* SC(unsigned char *key, unsigned int step, unsigned int size) {
 }
 
 void S(unsigned char* msg) {
+    int S[] = {
+        14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7,
+        0, 15, 7, 4, 14, 2, 13, 1, 10, 6, 12, 11, 9, 5, 3, 8,
+        4, 1, 14, 8, 13, 6, 2, 11, 15, 12, 9, 7, 3, 10, 5, 0,
+        15, 12, 8, 2, 4, 9, 1, 7, 5, 11, 3, 14, 10, 0, 6, 13
+    };
 
+    unsigned char* result = (unsigned char*)calloc(48 / 8, sizeof(unsigned char));
+
+    int index_msg = 0;
+    for(int i = 0; i < 6; i++) {
+        unsigned char value = 0;
+
+        for(int i = index_msg; i < index_msg + 6; i++) {
+            // Creazione blocco di 6 bit che viene salvato in value
+        }
+        index_msg += 6;
+
+        // x = bit_1, bit_6  ==> righa
+        // y = bit_2, b_2, b_4, b_5 ==> colonna
+
+        // si utilizzano questi bit per accedere a S[x][y]
+        // il valore si prende (valore a 4 bit) e si contatena a result per 
+        // costrurie il msg
+    }
+
+    for(int i = 0; i < 6; i++)
+        msg[i] = result[i];
+
+    free(result);
 }
 
 void P(unsigned char* msg) {
@@ -193,21 +223,36 @@ void DES_Enc(char* msg, char* key) {
     // Creo una chiave di appoggio per far in modo di non modificare la chiave
     // originaria durante le operazioni
 
-    PI(msg);
-    unsigned char *new_key = T(key);
+    // msg = 64 bit
+    PI((unsigned char*)msg);
+    // msg = 64 bit
+
+    // key = 64 bit
+    unsigned char *new_key = T((unsigned char*)key);
+    // new_key = 56 bit (togliamo i bit di parità)
+
     unsigned char *key_per_step;
 
-    unsigned char *left_msg = (unsigned char *)malloc(sizeof(char) * 4);
-    unsigned char *right_msg = (unsigned char *)malloc(sizeof(char) * 4);
+    unsigned char *left_msg = (unsigned char *)malloc(sizeof(char) * 5);
+    unsigned char *right_msg = (unsigned char *)malloc(sizeof(char) * 5);
 
     // Itero per ogni fase, nel caso del DES sono 16
     for (int i = 0; i < 16; i++) {
         key_per_step = new_key;
-        new_key = SC(key_per_step, 1, 58);
+
+        // key = 56 bit
+        if(i == 1 || i == 2 || i == 9 || i == 16)
+            new_key = SC(key_per_step, 1, 58);
+        else
+            new_key = SC(key_per_step, 2, 58);
+        // key = 56 bit ma shiftata di n = 1 o 2
 
         // utilizzo key_per_step
+        // key_per_step = 56 bit
         CT(key_per_step);
+        // key_per_step = 48 bit (gli vengono eseguita una compressione e trasposizione)
 
+        // divisione in messaggio left e right
         left_msg[0] = msg[0];
         left_msg[1] = msg[1];
         left_msg[2] = msg[2];
@@ -217,18 +262,38 @@ void DES_Enc(char* msg, char* key) {
         right_msg[5] = msg[5];
         right_msg[6] = msg[6];
         right_msg[7] = msg[7];
+        // la divisione fa avere due variabili => left_msg e right_msg = 32 bit
 
+        // right_msg = 32 bit
         EP(right_msg);
+        // right_msg = 48 bit
+
+
         Xor(right_msg, key_per_step, 48);
+
+        // Eseguo la funzione S-box, funzione non lineare
+        // cruciale per il funzionamento dell'algoritmo
+
+        // Essa prende metà msg espando, permutato e messo in xor a 48 bit
         S(right_msg);
+        // lo trasforma e restituisce una versione a 32
+
+        // il nuovo messaggio viene permutato nuovamente
         P(right_msg);
+
+        // viene messo a xor con la parte sinista
         Xor(right_msg, left_msg, 32);
 
+        // Viene ricomposto il messagio mettendo la vecchia parte
+        // destra del messaggio (quella avuta originariamente) 
+        // a sinistra
         msg[0] = msg[4];
         msg[1] = msg[5];
         msg[2] = msg[6];
         msg[3] = msg[6];
 
+        // mentre a destra viene effettivamente rimesso
+        // la parte di destra dopo tutte le operazione eseguite
         msg[4] = right_msg[0];
         msg[5] = right_msg[1];
         msg[6] = right_msg[2];
@@ -244,5 +309,33 @@ void DES_Enc(char* msg, char* key) {
 
 
 void DES_Dec(char* crt, char* key) {
-
+    /**
+     * La decifrazione consiste nel ripetere il processo invertendo l'ordine delle chiavi.
+     * Quindi prima si utilizza la chiave K[16] (quella ricavata dall'ultima operazione di shit ciclico)
+    */
 }
+
+/**
+ * TIPO DI ATTACCHI
+ * - Sfruttare la relazione Cdes(m, k) = c implica Cdes(m', k') = c' dove la ' indica la complementazione bit a bit (AND)
+ *   abbiamo che le uniche funzioni che inlfuenzano l'AND sono lo xor e S-bot, la prima ripropone uguale uscita se entrabi vengono 
+ *   complementati, quindi  l'ingresso nell'S-box è indientico per entrambi le coppie. In questo modo dimezziamo le possibili chiavi
+ *   e passiamo da 2^56 a 2^55
+ * 
+ * - Attacco CHOSEN-PLAIN-TEXT
+ * 
+ * - Attacco CRITTOANALISI DIFFERENZIALE
+ * 
+ * - Attacco CRITTOANALISI LINEARE
+*/
+
+/**
+ * Si può potenzialre il DES in due modi
+ * - 1: andando a utilizzare per ogni fase una chiave diversa (chiavi indipendeti), espandendo lo spazio
+ *      di chiavi da 56 bit a 768 bit. Che anche nel caso di crittografia differenziale abbiamo 2^61 possibili chiavi
+ *      Ovviamente ha un costo elevato produrre tutte queste seguneze casuali.
+ * - 2: Concatenare il des in un 2TDES o 3TDES nel seguente modo:
+ *          c = Cdes(Ddes(Cdes(m, k_1), k_2), k_1)
+ *          m = Ddes(Cdes(Ddes(m, k_1), k_2), k_1)
+ *      Sfruttando la proprietà per cui Cdes(Cdes(m, k1), k2) != Cdes(m, k3)
+*/
