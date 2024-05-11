@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "Utils.h"
 
 int* linear_generator(int a, int b, int m, int x, int n) {
     assert(a > 0 && b > 0 && m > 0 && x > 0 && n > 0);

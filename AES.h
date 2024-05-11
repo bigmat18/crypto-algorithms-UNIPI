@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "Utils.h"
 
 #define MATRIX(value, row, column) value[(row * 4) + column]
 

@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "Utils.h"
 
 void Permutation(unsigned char* msg, int* permutations, unsigned int size) {
     // len(msg) * 8 (lunghezza in bit) == size
