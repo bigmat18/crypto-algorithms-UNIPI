@@ -1,5 +1,7 @@
 #include "Utils.h"
 
+#ifndef MODULAR_ALGEBRA_H
+#define MODULAR_ALGEBRA_H
 /**
  * Algoritmo per calcolare Z* di n, cioè
  * tutti i numeri positivi < di n tali per cui il numero i
@@ -16,10 +18,10 @@ int* Z_sharp(int n, int size) {
     */
     for(int i = 0; i < size; i++) {
         if(Euclid(n, i) == 1) {
-            result[i] == true;
+            result[i] = true;
             count++;
         } else {
-            result[i] == false;
+            result[i] = false;
         }
     }
 
@@ -127,10 +129,10 @@ bool IsGenerator(int a, int n) {
 
     for(int i = 0; i < n; i++) {
         if(Euclid(n, i) == 1) {
-            result[i] == true;
+            result[i] = true;
             count++;
         } else {
-            result[i] == false;
+            result[i] = false;
         }
     }
 
@@ -157,3 +159,4 @@ bool IsGenerator(int a, int n) {
  * 
  * Inoltre sappaimo che per n primo si può dimostrare che il numero dei suoi generatori è phi(n-1)
 */
+#endif

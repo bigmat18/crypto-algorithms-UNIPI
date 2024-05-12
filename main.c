@@ -1,69 +1,26 @@
-#include "Generators.h"
-#include "HistoricalCiphers.h"
-#include "DES.h"
-#include "AES.h"
+// #include "Generators.h"
+// #include "HistoricalCiphers.h"
+// #include "DES.h"
+// #include "AES.h"
+#include "ModularAlgebra.h"
+#include "RSA.h"
 
 int main(void) {
-    // int n = 10;
-    // int seme = 0;
-    // int *result = linear_generator(211, 10, 3, seme, n);
-    // for(int i = 0; i < n; i++) {
-    //     fprintf(stderr, "%d\n", result[i]);
-    // }
-    // char *msg = strdup("ildelfino");
-    // char *key = strdup("abraabraa");
 
-    // printf("%s", str);
-    // GeneralCesare(str, 3);
-    // printf("%s", str);
+    // euclid_t e = Extended_Euclid(5, 132);
+    // printf("%u - %u - %u\n", e.d, e.x, e.y);
 
-    // printf("%s\n", msg);
-    // Vigenere(msg, key);
-    // printf("%s", msg);
+    int msg = 97;
+    int key_priv;
+    int key_pub;
+    Create_RSA_Key(5, 11, &key_priv, &key_pub);
+    printf("%x, %x\n", key_pub, key_priv);
 
-    // int trasp[] = {0, 1, 3, 2};
-    // char* msg = strdup("abcdefgh");
-
-    // printf("%s\n", msg);
-    // Trasposition(msg, trasp, 4);
-    // printf("%s", msg);
-
-    // unsigned char *msg = (unsigned char*)strdup("abcdefgh");
-    // int size = strlen((char*)msg);
-
-    // for (int i = 0; i < size; i++)
-    //     printf("%d ", msg[i]);
-    // printf("\n");
-
-    // PI(msg);
-
-    // for (int i = 0; i < size; i++)
-    //     printf("%d ", msg[i]);
-    // printf("\n");
-
-    // PF(msg);
-
-    // for (int i = 0; i < size; i++)
-    //     printf("%d ", msg[i]);
-    // printf("\n");
-
-    unsigned char* key = (unsigned char*)strdup("\xFF\xEF\xFF");
-    // for (int i = 0; i < 8; i++)
-    //     printf("%d ", key[i]);
-    // printf("\n");
-    // key = T(key);
-    // for(int i = 0; i < 7; i++)
-    //     printf("%d ", key[i]);
-
-    for (int i = 0; i < 3; i++)
-        printf("%d ", key[i]);
-    printf("\n");
-
-    SC(key, 1, 3 * 8);
-    
-    for (int i = 0; i < 3; i++)
-        printf("%d ", key[i]);
-    printf("\n");
+    printf("%d\n", msg);
+    msg = RSA_Enc(msg, key_pub, sizeof(int) * 8);
+    printf("%d\n", msg);
+    msg = RSA_Dec(msg, key_priv, sizeof(int) * 8);
+    printf("%d\n", msg);
 
     return 0;
 }

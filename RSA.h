@@ -38,15 +38,15 @@ void Create_RSA_Key(int p, int q, int* key_priv, int* key_pub) {
      * il mcd(p-1, q-1) deve essere piccolo. Per che ciò avvenga (p-1)/2 e (q-1)/2
      * devono essere co-primi.
      */
-    assert(Euclid((p - 1) / 2, (q - 1) / 2) == 1);
+    // assert(Euclid((p - 1) / 2, (q - 1) / 2) == 1);
 
     int n = p * q;
     int phi = (p - 1) * (q - 1); //per legge di eulero
     
     // Questo intero deve essere minore di phi(n) e primo con esso
-    int e; // = ...
+    int e = 7; // = ...
     assert(e < phi);
-    assert(Euclid(e, phi) == 1);
+    assert(Euclid(phi, e) == 1);
 
     /**
      * Se un assert in uno di questi for loop fallisce la cifratura non induce 
