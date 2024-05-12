@@ -81,21 +81,22 @@ int EuleroFunction(int n, int size) {
  * Esso si basa su risolvere ax + bt = mcd(a, b)
 */
 typedef struct {
-    int d; // Equivale a mcd(a, b)
-    int x; // x = a^{-1} mod b (usato per risolvere inverso in modulo)
-    int y;
+    long int d; // Equivale a mcd(a, b)
+    long int x; // x = a^{-1} mod b (usato per risolvere inverso in modulo)
+    long int y;
 } euclid_t;
 
 /**
  * L'algoritmo ha complessità logaritmica nel cavore di a e b, quindi polinomiale 
  * nella dimnesione dell'input.
 */
-euclid_t Extended_Euclid(int a, int b) {
+euclid_t Extended_Euclid(long int a, long int b) {
     if(b == 0) 
         return (euclid_t){a, 1, 0};
     else {
-        euclid_t result = Extended_Euclid(b, a % b);
-        return (euclid_t){result.d, result.y, result.x - floorf(a/b) * result.y};
+        volatile euclid_t result = Extended_Euclid(b, a % b);
+        volatile euclid_t return_value = (euclid_t){result.d, result.y, result.x - ((long int)floorf(a / b) * result.y)};
+        return return_value;
     }
 }
 /**
@@ -108,11 +109,10 @@ euclid_t Extended_Euclid(int a, int b) {
  * eseguire Extended_Euclid(a, n) e ritornando x visto che x = a^{-1} mod b
  * ax + by = 1
  */
-int InverseModule(int a, int n) {
+unsigned long int InverseModule(unsigned long int a, unsigned long int n) {
     euclid_t result = Extended_Euclid(a, n);
-    return result.x;
+    return result.x >= 0 ? result.x % n : n + result.x;
 }
-
 
 /**
  * DEFINIZIONE:

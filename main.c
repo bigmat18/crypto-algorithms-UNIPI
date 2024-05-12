@@ -6,21 +6,20 @@
 #include "RSA.h"
 
 int main(void) {
+    // unsigned long int e = InverseModule(7, 40);
+    // printf("%lu\n", e);
 
-    // euclid_t e = Extended_Euclid(5, 132);
-    // printf("%u - %u - %u\n", e.d, e.x, e.y);
-
-    int msg = 97;
-    int key_priv;
-    int key_pub;
+    unsigned long int msg = 97;
+    unsigned long int key_pub[2];
+    unsigned long int key_priv;
     Create_RSA_Key(5, 11, &key_priv, &key_pub);
-    printf("%x, %x\n", key_pub, key_priv);
+    printf("%lu - %lu - %lu\n", key_pub[0], key_pub[1], key_priv);
 
-    printf("%d\n", msg);
-    msg = RSA_Enc(msg, key_pub, sizeof(int) * 8);
-    printf("%d\n", msg);
-    msg = RSA_Dec(msg, key_priv, sizeof(int) * 8);
-    printf("%d\n", msg);
+    printf("%lu\n", msg);
+    msg = RSA_Enc(msg, key_pub[0], key_pub[1]);
+    printf("%lu\n", msg);
+    msg = RSA_Dec(msg, key_priv, key_pub[1]);
+    printf("%lu\n", msg);
 
     return 0;
 }

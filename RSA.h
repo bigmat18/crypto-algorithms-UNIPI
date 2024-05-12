@@ -15,7 +15,7 @@
  * - Sistemi molto più lenti. Due/tre ordini di grandezza superiore
  */
 
-void Create_RSA_Key(int p, int q, int* key_priv, int* key_pub) {
+void Create_RSA_Key(int p, int q, unsigned long int* key_priv, unsigned long int* key_pub) {
     // p e q devono essere primi
     assert(IsPrime(p));
     assert(IsPrime(q));
@@ -40,11 +40,11 @@ void Create_RSA_Key(int p, int q, int* key_priv, int* key_pub) {
      */
     // assert(Euclid((p - 1) / 2, (q - 1) / 2) == 1);
 
-    int n = p * q;
-    int phi = (p - 1) * (q - 1); //per legge di eulero
+    unsigned long int n = p * q;
+    unsigned long int phi = (p - 1) * (q - 1); //per legge di eulero
     
     // Questo intero deve essere minore di phi(n) e primo con esso
-    int e = 7; // = ...
+    unsigned long int e = 7; // = ...
     assert(e < phi);
     assert(Euclid(phi, e) == 1);
 
@@ -52,13 +52,13 @@ void Create_RSA_Key(int p, int q, int* key_priv, int* key_pub) {
      * Se un assert in uno di questi for loop fallisce la cifratura non induce 
      * alcuna trasfromazione del messaggio in chiaro m^e mod n = m
     */
-    for(int k = 0; k < p - 1; k++) {
+    for(unsigned long int k = 0; k < p - 1; k++) {
         if((p-1) % k == 0)
-            assert((phi + k) / k != e);
+            assert((unsigned int)((phi + k) / k) != e);
     }
-    for(int k = 0; k < q - 1; k++) {
+    for(unsigned long int k = 0; k < q - 1; k++) {
         if((p-1) % k == 0)
-            assert((phi + k) / k != e);
+            assert((unsigned int)((phi + k) / k) != e);
     } 
 
     /**
@@ -84,9 +84,12 @@ void Create_RSA_Key(int p, int q, int* key_priv, int* key_pub) {
      * in caso contrario si potrebbe verificare ogni possibile valore di d 
      * finchè la decifrazione non da un messaggio significativo. 
     */
-    int d = InverseModule(e, phi); // Calcoliamo e^-1 mod phi con eulicde esteso
 
-    *key_pub = e;
+    unsigned long int d = InverseModule(e, phi); // Calcoliamo e^-1 mod phi con eulicde esteso
+
+    key_pub[0] = e;
+    key_pub[1] = n;
+
     *key_priv = d;
 }
 
@@ -98,12 +101,12 @@ void Create_RSA_Key(int p, int q, int* key_priv, int* key_pub) {
  * Inoltre il calcolo di phi(n) (che potrebbe essere utilizzato per risolvere senza conoscere p, q)
  * è ugualemnte difficile alla fattorizazione
 */
-int RSA_Enc(int msg, int key_pub, int n) {
-    return (int)pow(msg, key_pub) % n;
+unsigned long int RSA_Enc(unsigned long int msg, unsigned long int e, unsigned long int n) {
+    return (unsigned long int)pow(msg, e) % n;
 }
 
-int RSA_Dec(int crt, int key_priv, int n) {
-    return (int)pow(crt, key_priv) % n;
+unsigned long int RSA_Dec(unsigned long int crt, unsigned long int d, unsigned long int n) {
+    return (unsigned long int)pow(crt, d) % n;
 }
 
 /**
@@ -114,5 +117,12 @@ int RSA_Dec(int crt, int key_priv, int n) {
  * DIMOSTRAZIONE: (correttezza)
  *  Dimostriamo che D(C(m, k[pub]), k[priv]) = m, ovvero (m^e mod n)^d mod n = m.
  *  Per proprietài calcolo possiamo riscrivere come m^{ed} mod n = m
- *  ...
+ *      1. p e q non dividono n
+ *         => m e n sono co-primo (Mcd(m, n) = 1)
+ *         a) per teorema di ulero n^{phi(n)} === 1 mod n
+ *         b) ed === 1 mod phi(n) [dalla def di inverso]
+ *            ed = 1 + r*phi(n)
+ *            ...
+ *      2. p o q dividono n
+ *         ...
 */
