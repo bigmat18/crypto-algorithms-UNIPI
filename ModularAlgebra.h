@@ -104,7 +104,7 @@ euclid_t Extended_Euclid(int a, int b) {
 /**
  * Da qui possiamo risolvere l'inverso di un numero primo in modulo n andando ad
  * eseguire Extended_Euclid(a, n) e ritornando x visto che x = a^{-1} mod b
- * ax + ny = 1
+ * ax + by = 1
  */
 int InverseModule(int a, int n) {
     euclid_t result = Extended_Euclid(a, n);
