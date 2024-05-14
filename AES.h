@@ -6,8 +6,10 @@
 unsigned char* NeyKey(unsigned char* key, int step) {
     if(step % 4 == 0) {
         // W[i] = W[i-1] xor W[i-1] 
+        return key;
     } else {
         // W[i] = W[i-1] xor T(W[i-1])
+        return key;
     }
 }
 
@@ -52,7 +54,7 @@ void SubstitutionByte(unsigned char* msg) {
 
    for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
-            MATRIX(msg, i, j) = Sbox(MATRIX(msg, i, j));
+            MATRIX(msg, i, j) = Sbox(&MATRIX(msg, i, j));
         }
    }
 }
@@ -100,7 +102,7 @@ void AES_Enc(unsigned char* msg, unsigned char* key) {
     for(int i = 0; i < steps; i++){
         // ad ogni fase viene generata una nuova chiave a 
         // partire da quella precedente
-        unsigned char new_key = NewKey(key); 
+        unsigned char* new_key = NewKey(key, 2); 
 
         SubstitutionByte(msg);
         ShiftRows(msg);
