@@ -168,9 +168,18 @@ point_t Kobliz(unsigned long int m, int h, eliptic_curve_t curve) {
 
 /**
  * CIFRATURA:
+ * - Mittente trasforma messaggio m in punto tramite altoritmo di kobliz
+ * - Mittente sceglie un intero casuale r e calcola V = rB, W = Pm + r*Pd dove Pd 
+ *   è la key_pub di dest
+ * - Mittente invia <V, W> a dest
 */
 
 /**
  * DECIFRATRUA:
+ * - Dest riceve coppia <V, W>
+ * - Dest usa la sua key_priv (np) calcolando 
+ *   Pm = W - ndV 
+ *      = Pm + rPd - nd * rB
+ *      = Pm + r(nd * B) - ndm* rB 
  */
 
