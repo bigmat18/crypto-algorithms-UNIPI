@@ -31,7 +31,7 @@ void T(unsigned char* msg) {
 }
 
 // input 1 solo byte
-unsigned char* Sbox(unsigned char* msg) {
+unsigned char Sbox(unsigned char* msg) {
     int permutations[] = {
         // permutazione 16 x 16 byte permutazioni di tutti i 256 interi a 8 bit
     };
@@ -102,7 +102,7 @@ void AES_Enc(unsigned char* msg, unsigned char* key) {
     for(int i = 0; i < steps; i++){
         // ad ogni fase viene generata una nuova chiave a 
         // partire da quella precedente
-        unsigned char* new_key = NewKey(key, 2); 
+        unsigned char* new_key; // = NewKey(key, 2); 
 
         SubstitutionByte(msg);
         ShiftRows(msg);

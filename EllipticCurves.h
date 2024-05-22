@@ -155,10 +155,10 @@ void ElGamal_Create_Key(int p, int B, eliptic_curve_t curve, int* key_pub, int* 
 point_t Kobliz(unsigned long int m, int h, eliptic_curve_t curve) {
     assert((m + 1) * h < curve.p);
 
-    for(int i = 0; i < curve.p; i++) {
+    for(int i = 0; i < h-1; i++) {
         int x = m * h + 1;
         int y = (int)(pow(x, 3) + curve.a * x + curve.b) % curve.p;
-        if(y) {
+        if(y) { // Se esiste questa radice 
             return (point_t){x, y};
         }
     }

@@ -2,22 +2,23 @@
 triple:          'x86_64-apple-darwin'
 binary-path:     main
 relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _Euclid, symObjAddr: 0x0, symBinAddr: 0x100000510, symSize: 0x30 }
-  - { offsetInCU: 0x62, offset: 0x62, size: 0x8, addend: 0x0, symName: _Euclid, symObjAddr: 0x0, symBinAddr: 0x100000510, symSize: 0x30 }
-  - { offsetInCU: 0xA7, offset: 0xA7, size: 0x8, addend: 0x0, symName: _Euclid.cold.1, symObjAddr: 0x890, symBinAddr: 0x100000DA0, symSize: 0x30 }
-  - { offsetInCU: 0xBE, offset: 0xBE, size: 0x8, addend: 0x0, symName: _IsPrime, symObjAddr: 0x30, symBinAddr: 0x100000540, symSize: 0x50 }
-  - { offsetInCU: 0xE8, offset: 0xE8, size: 0x8, addend: 0x0, symName: _PrimeGenerator, symObjAddr: 0x80, symBinAddr: 0x100000590, symSize: 0x110 }
-  - { offsetInCU: 0x1BE, offset: 0x1BE, size: 0x8, addend: 0x0, symName: _Z_sharp, symObjAddr: 0x190, symBinAddr: 0x1000006A0, symSize: 0xE0 }
-  - { offsetInCU: 0x28B, offset: 0x28B, size: 0x8, addend: 0x0, symName: _EuleroFunction, symObjAddr: 0x270, symBinAddr: 0x100000780, symSize: 0x50 }
-  - { offsetInCU: 0x2FD, offset: 0x2FD, size: 0x8, addend: 0x0, symName: _Extended_Euclid, symObjAddr: 0x2C0, symBinAddr: 0x1000007D0, symSize: 0x90 }
-  - { offsetInCU: 0x37D, offset: 0x37D, size: 0x8, addend: 0x0, symName: _InverseModule, symObjAddr: 0x350, symBinAddr: 0x100000860, symSize: 0x40 }
-  - { offsetInCU: 0x3CC, offset: 0x3CC, size: 0x8, addend: 0x0, symName: _IsGenerator, symObjAddr: 0x390, symBinAddr: 0x1000008A0, symSize: 0x130 }
-  - { offsetInCU: 0x520, offset: 0x520, size: 0x8, addend: 0x0, symName: _Create_RSA_Key, symObjAddr: 0x4C0, symBinAddr: 0x1000009D0, symSize: 0x160 }
-  - { offsetInCU: 0x6AC, offset: 0x6AC, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.4, symObjAddr: 0x950, symBinAddr: 0x100000E60, symSize: 0x21 }
-  - { offsetInCU: 0x6C3, offset: 0x6C3, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.3, symObjAddr: 0x920, symBinAddr: 0x100000E30, symSize: 0x30 }
-  - { offsetInCU: 0x6DA, offset: 0x6DA, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.1, symObjAddr: 0x8C0, symBinAddr: 0x100000DD0, symSize: 0x30 }
-  - { offsetInCU: 0x6F1, offset: 0x6F1, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.2, symObjAddr: 0x8F0, symBinAddr: 0x100000E00, symSize: 0x30 }
-  - { offsetInCU: 0x708, offset: 0x708, size: 0x8, addend: 0x0, symName: _RSA_Enc, symObjAddr: 0x620, symBinAddr: 0x100000B30, symSize: 0x80 }
-  - { offsetInCU: 0x737, offset: 0x737, size: 0x8, addend: 0x0, symName: _RSA_Dec, symObjAddr: 0x6A0, symBinAddr: 0x100000BB0, symSize: 0x80 }
-  - { offsetInCU: 0x7C2, offset: 0x7C2, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x720, symBinAddr: 0x100000C30, symSize: 0x170 }
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _Euclid, symObjAddr: 0x0, symBinAddr: 0x1000005F0, symSize: 0x30 }
+  - { offsetInCU: 0x62, offset: 0x62, size: 0x8, addend: 0x0, symName: _Euclid, symObjAddr: 0x0, symBinAddr: 0x1000005F0, symSize: 0x30 }
+  - { offsetInCU: 0xA7, offset: 0xA7, size: 0x8, addend: 0x0, symName: _Euclid.cold.1, symObjAddr: 0x780, symBinAddr: 0x100000D70, symSize: 0x30 }
+  - { offsetInCU: 0xBE, offset: 0xBE, size: 0x8, addend: 0x0, symName: _IsPrime, symObjAddr: 0x30, symBinAddr: 0x100000620, symSize: 0x50 }
+  - { offsetInCU: 0xE8, offset: 0xE8, size: 0x8, addend: 0x0, symName: _PrimeGenerator, symObjAddr: 0x80, symBinAddr: 0x100000670, symSize: 0x110 }
+  - { offsetInCU: 0x1BE, offset: 0x1BE, size: 0x8, addend: 0x0, symName: _Z_sharp, symObjAddr: 0x190, symBinAddr: 0x100000780, symSize: 0xE0 }
+  - { offsetInCU: 0x28B, offset: 0x28B, size: 0x8, addend: 0x0, symName: _EuleroFunction, symObjAddr: 0x270, symBinAddr: 0x100000860, symSize: 0x50 }
+  - { offsetInCU: 0x2FD, offset: 0x2FD, size: 0x8, addend: 0x0, symName: _Extended_Euclid, symObjAddr: 0x2C0, symBinAddr: 0x1000008B0, symSize: 0x90 }
+  - { offsetInCU: 0x37D, offset: 0x37D, size: 0x8, addend: 0x0, symName: _InverseModule, symObjAddr: 0x350, symBinAddr: 0x100000940, symSize: 0x30 }
+  - { offsetInCU: 0x3CD, offset: 0x3CD, size: 0x8, addend: 0x0, symName: _IsGenerator, symObjAddr: 0x380, symBinAddr: 0x100000970, symSize: 0x130 }
+  - { offsetInCU: 0x521, offset: 0x521, size: 0x8, addend: 0x0, symName: _Create_RSA_Key, symObjAddr: 0x4B0, symBinAddr: 0x100000AA0, symSize: 0x190 }
+  - { offsetInCU: 0x6EF, offset: 0x6EF, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.5, symObjAddr: 0x870, symBinAddr: 0x100000E60, symSize: 0x21 }
+  - { offsetInCU: 0x706, offset: 0x706, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.4, symObjAddr: 0x840, symBinAddr: 0x100000E30, symSize: 0x30 }
+  - { offsetInCU: 0x71D, offset: 0x71D, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.3, symObjAddr: 0x810, symBinAddr: 0x100000E00, symSize: 0x30 }
+  - { offsetInCU: 0x734, offset: 0x734, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.1, symObjAddr: 0x7B0, symBinAddr: 0x100000DA0, symSize: 0x30 }
+  - { offsetInCU: 0x74B, offset: 0x74B, size: 0x8, addend: 0x0, symName: _Create_RSA_Key.cold.2, symObjAddr: 0x7E0, symBinAddr: 0x100000DD0, symSize: 0x30 }
+  - { offsetInCU: 0x762, offset: 0x762, size: 0x8, addend: 0x0, symName: _RSA_Enc, symObjAddr: 0x640, symBinAddr: 0x100000C30, symSize: 0x80 }
+  - { offsetInCU: 0x7A9, offset: 0x7A9, size: 0x8, addend: 0x0, symName: _RSA_Dec, symObjAddr: 0x6C0, symBinAddr: 0x100000CB0, symSize: 0x80 }
+  - { offsetInCU: 0x7F0, offset: 0x7F0, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x740, symBinAddr: 0x100000D30, symSize: 0x40 }
 ...

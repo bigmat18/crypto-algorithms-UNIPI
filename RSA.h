@@ -38,7 +38,7 @@ void Create_RSA_Key(int p, int q, unsigned long int* key_priv, unsigned long int
      * il mcd(p-1, q-1) deve essere piccolo. Per che ciò avvenga (p-1)/2 e (q-1)/2
      * devono essere co-primi.
      */
-    // assert(Euclid((p - 1) / 2, (q - 1) / 2) == 1);
+    assert(Euclid((p - 1) / 2, (q - 1) / 2) == 1);
 
     unsigned long int n = p * q;
     unsigned long int phi = (p - 1) * (q - 1); //per legge di eulero
@@ -57,7 +57,7 @@ void Create_RSA_Key(int p, int q, unsigned long int* key_priv, unsigned long int
             assert((unsigned int)((phi + k) / k) != e);
     }
     for(unsigned long int k = 0; k < q - 1; k++) {
-        if((p-1) % k == 0)
+        if((q-1) % k == 0)
             assert((unsigned int)((phi + k) / k) != e);
     } 
 

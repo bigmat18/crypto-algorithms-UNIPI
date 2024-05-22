@@ -111,12 +111,12 @@ euclid_t Extended_Euclid(long int a, long int b) {
  */
 unsigned long int InverseModule(unsigned long int a, unsigned long int n) {
     euclid_t result = Extended_Euclid(a, n);
-    return result.x >= 0 ? result.x % n : n + result.x;
+    return result.x; //>= 0 ? result.x % n : n + result.x;
 }
 
 /**
  * DEFINIZIONE:
- *  Definiamo un generator un numero a \in Z* di n tale che 
+ *  Definiamo un generatore un numero a \in Z* di n tale che 
  *      a^k mod n   per ogni 1 <= k <= phi(n)
  * genera tutti e soli gli elementi di Z* di n 
 */
